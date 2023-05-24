@@ -1,0 +1,23 @@
+{
+  "name": "vue.start",
+  "version": "1.0.0",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "core-js": "^3.30.1",
+    "find-cache-dir": "^4.0.0",
+    "vue": "^3.2.47",
+    "vue-float-label": "^1.6.1",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "@vue/compiler-sfc": "^3.2.47",
+    "node-sass": "8.0.0",
+    "sass-loader": "13.2.2"
+  }
+}
