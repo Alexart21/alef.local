@@ -1,12 +1,12 @@
 import { createStore } from 'vuex'
 
-import app from './app'
+import user from './user'
 
 const store = {
 	state: {
 	},
 	modules: {
-		app,
+		user,
 	},
 	strict: process.env.NODE_ENV !== 'production'
 }

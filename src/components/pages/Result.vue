@@ -27,7 +27,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapState('app', ['data']), // vuex module...mapState(['main']), // global state
+    ...mapState('user', ['data']), // vuex module...mapState(['main']), // global state
   }
 }
 </script>

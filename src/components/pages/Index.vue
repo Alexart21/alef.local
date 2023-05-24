@@ -2,15 +2,15 @@
   <div class="content">
     <div>
       <h2>Персональные данные</h2>
-      <form action="">
+      <form @submit.prevent="save()" id="user-form" action="">
         <div class="form-group fl">
           <float-label>
-            <input type="text" v-model="name" placeholder="Имя" class="index-inp">
+            <input type="text" v-model="name" placeholder="Имя" class="index-inp" required name="name">
           </float-label>
         </div>
         <div class="form-group fl">
           <float-label>
-            <input type="number" v-model="age" placeholder="Возраст" class="index-inp">
+            <input type="number" v-model="age" placeholder="Возраст" class="index-inp" required min="18" max="100" name="age">
           </float-label>
         </div>
       </form>
@@ -24,22 +24,22 @@
     <div class="child-form" v-for="(row, rowIndex) in childs" :key="rowIndex">
       <div class="form-group fl">
         <float-label>
-          <input type="text" v-model="row.name" placeholder="Имя" class="index-inp">
+          <input form="user-form" type="text" v-model="row.name" placeholder="Имя" class="index-inp" required>
         </float-label>
       </div>
       <div class="form-group fl">
         <float-label>
-          <input type="number" v-model="row.age" placeholder="Возраст" class="index-inp">
+          <input form="user-form" type="number" v-model="row.age" placeholder="Возраст" class="index-inp" max="17" required>
         </float-label>
       </div>
       <div @click="delChild(rowIndex)" class="ch-del">удалить</div>
     </div>
-    <div @click="save()" class="save-bt">Сохранить</div>
+    <button form="user-form" type="submit" class="save-bt">Сохранить</button>
   </div>
 
 </template>
 <script>
-import {mapMutations} from 'vuex'
+import {mapActions} from 'vuex'
 import FloatLabel from 'vue-float-label/components/FloatLabel'
 
 export default {
@@ -57,7 +57,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('app', ['setData']),
+    ...mapActions('user', ['setUserData']),
     clearMsgs() {
       this.errMsg = '';
       this.successMsg = '';
@@ -99,6 +99,7 @@ export default {
       return errors;
     },
     save() {
+      console.log('here');
       this.clearMsgs();
       if (!this.validate()) {
         this.errMsg = 'Есть незаполненные поля!';
@@ -111,7 +112,7 @@ export default {
           data.childs = this.childs;
         }
         try {
-          this.setData(data);
+          this.setUserData(data);
           this.successMsg = 'Успешно!';
         } catch (e) {
           console.log(e)
@@ -119,6 +120,7 @@ export default {
       }
     },
   },
-  computed: {}
+  computed: {
+  }
 }
 </script>

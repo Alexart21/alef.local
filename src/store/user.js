@@ -13,6 +13,8 @@ export default {
         },
       },
       actions: {
-
+        setUserData(context, payload){
+          context.commit('setData', payload)
+        }
       },
 }
