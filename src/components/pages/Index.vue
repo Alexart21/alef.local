@@ -10,7 +10,7 @@
         </div>
         <div class="form-group fl">
           <float-label>
-            <input type="number" v-model="age" placeholder="Возраст" class="index-inp" required min="18" max="100">
+            <input type="text" v-model="age" placeholder="Возраст" class="index-inp" required pattern="^[1-9][0-9]{0,1}|^(100)$">
           </float-label>
         </div>
       </form>
@@ -30,7 +30,7 @@
       <div class="form-group fl">
         <float-label>
           <input form="user-form" type="text" v-model="row.age" placeholder="Возраст" class="index-inp"
-                 required pattern="^[1-9][0-9]{0,1}$|^(100)$">
+                 required max="17" pattern="^[1-9][0-9]{0,1}$|^(100)$">
         </float-label>
       </div>
       <div @click="delChild(rowIndex)" class="ch-del">удалить</div>
@@ -85,18 +85,18 @@ export default {
       // console.log(this.childs);
     },
     validate() { // простейшая валидация на required
-      let errors = true;
+      let valid = true;
       if (this.childs.length) {
         this.childs.map((item) => {
           if (!item.name || !item.age) {
-            errors = false;
+            valid = false;
           }
         })
       }
       if (!this.name || !this.age) {
-        errors = false;
+        valid = false;
       }
-      return errors;
+      return valid;
     },
     save() {
       // console.log('here');
