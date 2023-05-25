@@ -10,8 +10,7 @@
         </div>
         <div class="form-group fl">
           <float-label>
-            <input type="number" v-model="age" placeholder="Возраст" class="index-inp" required min="18" max="100"
-                   name="age">
+            <input type="number" v-model="age" placeholder="Возраст" class="index-inp" required min="18" max="100">
           </float-label>
         </div>
       </form>
@@ -30,8 +29,8 @@
       </div>
       <div class="form-group fl">
         <float-label>
-          <input form="user-form" type="number" v-model="row.age" placeholder="Возраст" class="index-inp" max="17"
-                 required>
+          <input form="user-form" type="text" v-model="row.age" placeholder="Возраст" class="index-inp"
+                 required pattern="^[1-9][0-9]{0,1}$|^(100)$">
         </float-label>
       </div>
       <div @click="delChild(rowIndex)" class="ch-del">удалить</div>
