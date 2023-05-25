@@ -23,8 +23,11 @@ body{
 }
 
 .h_1{
+  font-style: normal;
+  font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  color: #111111;
 }
 
 .topMenu{
@@ -60,6 +63,7 @@ body{
   height: 3em !important;
   padding: .5em;
   width: 100%;
+  border: 1px solid gray;
 }
 
 .fl label{
@@ -79,20 +83,26 @@ body{
 }
 
 .ch-bt .add-btn{
+  position: relative;
   height: 44px;
   width: 204px;
-  border: 1px solid var(--btn-color);
-  /*padding: 1em;*/
-  border-top-left-radius: 44px;
-  border-bottom-left-radius: 44px;
-  border-top-right-radius: 44px;
-  border-bottom-right-radius: 44px;
+  border: 2px solid #01A7FD;
+  border-radius: 100px;
   cursor: pointer;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px 10px 38px;
   font-size: 14px;
   line-height: 24px;
   font-family: Montserrat-Regular;
   color: var(--btn-color);
+}
+
+.plus{
+  position: absolute;
+  left: 5px;
+  top: 9px;
+  font-size: 48px;
+  line-height: 24px;
+  font-weight: normal;
 }
 
 .child-form{

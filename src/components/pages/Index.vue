@@ -19,8 +19,8 @@
     <div v-if="errMsg" class="text-danger">{{ errMsg }}</div>
     <div v-if="successMsg" class="text-success">{{ successMsg }}</div>
     <div class="ch-bt">
-      <div>Дети (макс. 5)</div>
-      <div v-if="this.childs.length <= 4" @click="addChild()" class="add-btn">+ Добавить ребенка</div>
+      <div class="h_1">Дети (макс. 5)</div>
+      <div v-if="this.childs.length <= 4" @click="addChild()" class="add-btn"><span class="plus">+</span> Добавить ребенка</div>
     </div>
     <div class="child-form" v-for="(row, rowIndex) in childs" :key="rowIndex">
       <div class="form-group fl">
@@ -81,6 +81,7 @@ export default {
       }
     },
     delChild(Index) {
+      this.clearMsgs();
       this.childs.splice(Index, 1);
       // console.log(this.childs);
     },
@@ -99,7 +100,7 @@ export default {
       return errors;
     },
     save() {
-      console.log('here');
+      // console.log('here');
       this.clearMsgs();
       if (!this.validate()) {
         this.errMsg = 'Есть незаполненные поля!';

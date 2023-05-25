@@ -9,12 +9,12 @@ export default {
       mutations: {
         setData(state, payload) {
           state.data = payload;
-          console.log(state.data);
+          // console.log(state.data);
         },
       },
       actions: {
-        setUserData(context, payload){
-          context.commit('setData', payload)
+        setUserData({ commit }, payload){
+          commit('setData', payload)
         }
       },
 }
