@@ -5,12 +5,13 @@
       <form @submit.prevent="save()" id="user-form" action="">
         <div class="form-group fl">
           <float-label>
-            <input type="text" v-model="name" placeholder="Имя" class="index-inp" required name="name">
+            <input ref="name" type="text" v-model="name" placeholder="Имя" class="index-inp" name="name">
           </float-label>
         </div>
         <div class="form-group fl">
           <float-label>
-            <input type="text" v-model="age" placeholder="Возраст" class="index-inp" required pattern="^[1-9][0-9]{0,1}|^(100)$">
+            <input ref="age" type="text" v-model="age" placeholder="Возраст" class="index-inp"
+                   pattern="^[1-9][0-9]{0,1}|^(100)$">
           </float-label>
         </div>
       </form>
@@ -19,18 +20,21 @@
     <div v-if="successMsg" class="text-success">{{ successMsg }}</div>
     <div class="ch-bt">
       <div class="h_1">Дети (макс. 5)</div>
-      <div v-if="this.childs.length <= 4" @click="addChild()" class="add-btn"><span class="plus">+</span> Добавить ребенка</div>
+      <div v-if="this.childs.length <= 4" @click="addChild()" class="add-btn"><span class="plus">+</span> Добавить
+        ребенка
+      </div>
     </div>
     <div class="child-form" v-for="(row, rowIndex) in childs" :key="rowIndex">
       <div class="form-group fl">
         <float-label>
-          <input form="user-form" type="text" v-model="row.name" placeholder="Имя" class="index-inp" required>
+          <input form="user-form" type="text" v-model="row.name" placeholder="Имя" class="index-inp"
+                 :id="'name_' + row.id">
         </float-label>
       </div>
       <div class="form-group fl">
         <float-label>
           <input form="user-form" type="text" v-model="row.age" placeholder="Возраст" class="index-inp"
-                 required max="17" pattern="^[1-9][0-9]{0,1}$|^(100)$">
+                 max="17" pattern="^[1-9][0-9]{0,1}$|^(100)$" :id="'age_' + row.id">
         </float-label>
       </div>
       <div @click="delChild(rowIndex)" class="ch-del">удалить</div>
@@ -59,9 +63,17 @@ export default {
   },
   methods: {
     ...mapActions('user', ['setUserData']),
-    clearMsgs() {
+    clearMsgs() { // убираем уведомления и красные рамки ошибок если есть
       this.errMsg = '';
       this.successMsg = '';
+      this.$refs.name.style.outline = '';
+      this.$refs.age.style.outline = '';
+      if (this.childs.length) {
+        this.childs.map((item) => {
+          document.getElementById('name_' + item.id).style.outline = '';
+          document.getElementById('age_' + item.id).style.outline = '';
+        })
+      }
     },
     addChild() {
       this.clearMsgs();
@@ -73,7 +85,8 @@ export default {
             return;
           }
         }
-        this.childs.push({name: '', age: null});
+        const uniqueId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        this.childs.push({id: uniqueId, name: '', age: null});
         console.log(this.childs);
       } else {
         console.log('много');
@@ -84,22 +97,31 @@ export default {
       this.childs.splice(Index, 1);
       // console.log(this.childs);
     },
-    validate() { // простейшая валидация на required
+    validate() { // простая валидация на required
       let valid = true;
+      if (!this.name) {
+        this.$refs.name.style.outline = '1px solid red';
+        valid = false;
+      }
+      if (!this.age) {
+        this.$refs.age.style.outline = '1px solid red';
+        valid = false;
+      }
       if (this.childs.length) {
         this.childs.map((item) => {
-          if (!item.name || !item.age) {
+          if (!item.name) {
+            document.getElementById('name_' + item.id).style.outline = '1px solid red';
+            valid = false;
+          }
+          if (!item.age) {
+            document.getElementById('age_' + item.id).style.outline = '1px solid red';
             valid = false;
           }
         })
       }
-      if (!this.name || !this.age) {
-        valid = false;
-      }
       return valid;
     },
     save() {
-      // console.log('here');
       this.clearMsgs();
       if (!this.validate()) {
         this.errMsg = 'Есть незаполненные поля!';
