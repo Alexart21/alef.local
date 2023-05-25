@@ -1,7 +1,44 @@
+:root{
+  --btn-color: #01A7FD;
+}
+
+@font-face {
+  font-family: Montserrat-Medium;
+  src: url("./../fonts/Montserrat-Medium.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url("./../fonts/Montserrat-Regular.ttf");
+  font-display: swap;
+}
+
+body{
+  font-family: Montserrat-Medium;
+  color: #111111;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.h_1{
+  font-size: 16px;
+  line-height: 24px;
+}
+
 .topMenu{
   position: relative;
   display: flex;
   justify-content: center;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: Montserrat-Regular;
+}
+
+.topMenu a, .topMenu a:visited, .topMenu a:hover{
+  color: gray !important;
+  text-decoration: none !important;
 }
 
 .logo{
@@ -27,8 +64,11 @@
 
 .fl label{
   padding: .5em;
-  margin-top: 1em;
+  margin-top: 0.6em;
   width: 100%;
+  font-size: 14px;
+  color: rgba(17, 17, 17, 0.48);
+;
 }
 
 .ch-bt{
@@ -39,16 +79,20 @@
 }
 
 .ch-bt .add-btn{
-  height: 3em;
-
-  border: 1px solid blue;
+  height: 44px;
+  width: 204px;
+  border: 1px solid var(--btn-color);
   /*padding: 1em;*/
-  border-top-left-radius: 1.5em;
-  border-bottom-left-radius: 1.5em;
-  border-top-right-radius: 1.5em;
-  border-bottom-right-radius: 1.5em;
+  border-top-left-radius: 44px;
+  border-bottom-left-radius: 44px;
+  border-top-right-radius: 44px;
+  border-bottom-right-radius: 44px;
   cursor: pointer;
-  padding: 0 1em;
+  padding: 10px 20px 10px 20px;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: Montserrat-Regular;
+  color: var(--btn-color);
 }
 
 .child-form{
@@ -59,29 +103,31 @@
 
 .ch-del{
   line-height: 3em;
-  color: red;
+  color: var(--btn-color);
   cursor: pointer;
 }
 
 .save-bt{
-  height: 3em;
-  width: 7em;
- line-height: 3em;
-  border: 1px solid blue;
+  width: 118px;
+  height: 44px;
+  line-height: 24px;
+  font-size: 14px;
+  border: 1px solid var(--btn-color);
   /*padding: 1em;*/
-  border-top-left-radius: 1.5em;
-  border-bottom-left-radius: 1.5em;
-  border-top-right-radius: 1.5em;
-  border-bottom-right-radius: 1.5em;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
   cursor: pointer;
-  padding: 0 1em;
-  background: blue;
+  /*padding: 0 1em;*/
+  background: var(--btn-color);
   color: #fff;
+
 }
 
 /* уберем стрелочки у input[number] */
 .h-light{
-  color: #b2b2b6 !important;
+  color: gray !important;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -97,6 +143,31 @@ input[type="number"]:focus {
 }
 /**/
 
-.index-inp{
 
+::-webkit-input-placeholder { /* WebKit browsers */
+  color:    #111;
+  font-family: 'Montserrat-Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color:    #111;
+  font-family: 'Montserrat-Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.fl label{
+  color: gray;
+}
+
+.childs-item{
+  display: inline;
+  background: #F1F1F1;
+  border-radius: 5px;
+  padding: 10px 20px;
 }

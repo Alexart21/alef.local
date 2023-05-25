@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div>
-      <h2>Персональные данные</h2>
+      <h1 class="h_1">Персональные данные</h1>
       <form @submit.prevent="save()" id="user-form" action="">
         <div class="form-group fl">
           <float-label>
@@ -10,7 +10,8 @@
         </div>
         <div class="form-group fl">
           <float-label>
-            <input type="number" v-model="age" placeholder="Возраст" class="index-inp" required min="18" max="100" name="age">
+            <input type="number" v-model="age" placeholder="Возраст" class="index-inp" required min="18" max="100"
+                   name="age">
           </float-label>
         </div>
       </form>
@@ -19,7 +20,7 @@
     <div v-if="successMsg" class="text-success">{{ successMsg }}</div>
     <div class="ch-bt">
       <div>Дети (макс. 5)</div>
-      <div v-if="this.childs.length <= 4" @click="addChild()" class="add-btn">+ добавить ребенка</div>
+      <div v-if="this.childs.length <= 4" @click="addChild()" class="add-btn">+ Добавить ребенка</div>
     </div>
     <div class="child-form" v-for="(row, rowIndex) in childs" :key="rowIndex">
       <div class="form-group fl">
@@ -29,7 +30,8 @@
       </div>
       <div class="form-group fl">
         <float-label>
-          <input form="user-form" type="number" v-model="row.age" placeholder="Возраст" class="index-inp" max="17" required>
+          <input form="user-form" type="number" v-model="row.age" placeholder="Возраст" class="index-inp" max="17"
+                 required>
         </float-label>
       </div>
       <div @click="delChild(rowIndex)" class="ch-del">удалить</div>
@@ -71,10 +73,8 @@ export default {
             this.errMsg = 'Заполните поля!';
             return;
           }
-          this.childs.push({name: '', age: null});
-        } else { // первый дитя
-          this.childs.push({name: '', age: null});
         }
+        this.childs.push({name: '', age: null});
         console.log(this.childs);
       } else {
         console.log('много');
@@ -120,7 +120,6 @@ export default {
       }
     },
   },
-  computed: {
-  }
+  computed: {}
 }
 </script>

@@ -1,16 +1,19 @@
 <template>
   <div class="content">
-    <h3 class="h-light">Персональные данные</h3>
+    <h1 class="h_1">Персональные данные</h1>
     <div v-if="data">
       <div>
-        <h4>{{ data.name }}, {{ data.age }} лет</h4>
+        <div>{{ data.name }}, {{ data.age }} лет</div>
       </div>
       <div v-if="data.childs">
         <br>
         <br>
-        <div class="h3 h-light">Дети</div>
+        <h1 class="h_1">Дети</h1>
+        <br>
         <div v-for="(child, index) in data.childs">
-          <h4>{{ data.childs[index].name }}, {{ data.childs[index].age }} лет</h4>
+          <div class="childs-item">{{ data.childs[index].name }}, {{ data.childs[index].age }} лет</div>
+          <br>
+          <br>
         </div>
       </div>
     </div>
