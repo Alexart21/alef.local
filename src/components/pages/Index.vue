@@ -100,7 +100,9 @@ export default {
       let notValid = false;
       let msg = null;
       let nameRegexp = /^[А-Яа-яё -][А-Яа-яё -][А-Яа-яё -]*$/i;
-      let ageRegexp = /^[1-9][0-9]{0,1}$|^(100)$/;
+      // let ageRegexp = /^[1-9][0-9]{0,1}$|^(100)$/;
+      let ageRegexp_18_100 = /^(1[89]|[2-9][0-9]|100)$/; // от 18 до 100
+      let ageRegexp_1_17 = /^(1[0-7]|[1-9])$/; // от 1 до 17
       if (!this.name) {
         this.$refs.name.style.outline = '1px solid red';
         isEmpty = true;
@@ -111,7 +113,7 @@ export default {
       if (!this.age) {
         this.$refs.age.style.outline = '1px solid red';
         isEmpty = true;
-      }else if(!ageRegexp.test(this.age)){
+      }else if(!ageRegexp_18_100.test(this.age)){
         this.$refs.age.style.outline = '1px solid red';
         notValid = true;
       }
@@ -127,7 +129,7 @@ export default {
           if (!item.age) {
             document.getElementById('age_' + item.id).style.outline = '1px solid red';
             isEmpty = true;
-          }else if(!ageRegexp.test(item.age)){
+          }else if(!ageRegexp_1_17.test(item.age)){
             document.getElementById('age_' + item.id).style.outline = '1px solid red';
             notValid = true;
           }
@@ -136,7 +138,7 @@ export default {
       if(isEmpty){
         msg = 'Есть незаполненные поля!';
       }else if(notValid){
-        msg = 'Введите корректные данные! Имя - только кирилица. Возраст - только число 1-100';
+        msg = 'Введите корректные данные! Имя - только кирилица. Возраст - только число 18-100(1-17 для детей)';
       }
       return msg;
     },
