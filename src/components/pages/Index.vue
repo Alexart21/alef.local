@@ -5,13 +5,12 @@
       <form @submit.prevent="save()" id="user-form" action="">
         <div class="form-group fl">
           <float-label>
-            <input ref="name" type="text" v-model="name" placeholder="Имя" class="index-inp" name="name">
+            <input ref="name" type="text" v-model="name" placeholder="Имя" class="index-inp" >
           </float-label>
         </div>
         <div class="form-group fl">
           <float-label>
-            <input ref="age" type="text" v-model="age" placeholder="Возраст" class="index-inp"
-                   pattern="^[1-9][0-9]{0,1}|^(100)$">
+            <input ref="age" type="text" v-model="age" placeholder="Возраст" class="index-inp">
           </float-label>
         </div>
       </form>
@@ -33,8 +32,7 @@
       </div>
       <div class="form-group fl">
         <float-label>
-          <input form="user-form" type="text" v-model="row.age" placeholder="Возраст" class="index-inp"
-                 max="17" pattern="^[1-9][0-9]{0,1}$|^(100)$" :id="'age_' + row.id">
+          <input form="user-form" type="text" v-model="row.age" placeholder="Возраст" class="index-inp" :id="'age_' + row.id">
         </float-label>
       </div>
       <div @click="delChild(rowIndex)" class="ch-del">удалить</div>
@@ -97,34 +95,56 @@ export default {
       this.childs.splice(Index, 1);
       // console.log(this.childs);
     },
-    validate() { // простая валидация на required
-      let valid = true;
+    hasError() { // валидация на required и соответствие регуляркам
+      let isEmpty = false;
+      let notValid = false;
+      let msg = null;
+      let nameRegexp = /^[А-Яа-яё -][А-Яа-яё -][А-Яа-яё -]*$/i;
+      let ageRegexp = /^[1-9][0-9]{0,1}$|^(100)$/;
       if (!this.name) {
         this.$refs.name.style.outline = '1px solid red';
-        valid = false;
+        isEmpty = true;
+      }else if(!nameRegexp.test(this.name)){
+        this.$refs.name.style.outline = '1px solid red';
+        notValid = true;
       }
       if (!this.age) {
         this.$refs.age.style.outline = '1px solid red';
-        valid = false;
+        isEmpty = true;
+      }else if(!ageRegexp.test(this.age)){
+        this.$refs.age.style.outline = '1px solid red';
+        notValid = true;
       }
       if (this.childs.length) {
         this.childs.map((item) => {
           if (!item.name) {
             document.getElementById('name_' + item.id).style.outline = '1px solid red';
-            valid = false;
+            isEmpty = true;
+          }else if(!nameRegexp.test(item.name)){
+            document.getElementById('name_' + item.id).style.outline = '1px solid red';
+            notValid = true;
           }
           if (!item.age) {
             document.getElementById('age_' + item.id).style.outline = '1px solid red';
-            valid = false;
+            isEmpty = true;
+          }else if(!ageRegexp.test(item.age)){
+            document.getElementById('age_' + item.id).style.outline = '1px solid red';
+            notValid = true;
           }
         })
       }
-      return valid;
+      if(isEmpty){
+        msg = 'Есть незаполненные поля!';
+      }else if(notValid){
+        msg = 'Введите корректные данные! Имя - только кирилица. Возраст - только число 1-100';
+      }
+      return msg;
     },
     save() {
       this.clearMsgs();
-      if (!this.validate()) {
-        this.errMsg = 'Есть незаполненные поля!';
+      this.errMsg = this.hasError();
+      if (this.errMsg) {
+        return;
       } else {
         let data = {
           name: this.name,
